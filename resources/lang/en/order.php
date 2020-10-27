@@ -4,7 +4,7 @@
  *
  */
 return [
-    'id'                    => 'ID',
+    'id'                    => 'Order ID',
     'title'                 => 'Order',
     'customer_name'         => 'Customer name',
     'email'                 => 'Email',
@@ -14,12 +14,15 @@ return [
     'free_shipping'         => 'Free shipping',
     'discount'              => 'Discount',
     'total'                 => 'Total',
+    'domain'                => 'Domain',
     'order_total'           => 'Order Total',
     'received'              => 'Received',
     'balance'               => 'Balance',
     'status'                => 'Status',
     'shipping_first_name'   => 'First name',
     'shipping_last_name'    => 'Last name',
+    'shipping_first_name_kana' => 'First name kana',
+    'shipping_last_name_kana' => 'Last name kana',
     'shipping_address'      => 'Address',
     'shipping_address1'     => 'Address 1',
     'address1'              => 'Address 1',
@@ -51,8 +54,10 @@ return [
     'payment_method'        => 'Payment method',
     'shipping_method'       => 'Shipping method',
     'date'                  => 'Date',
+    'date_export'           => 'Date export',
     'created_at'            => 'Date',
     'qty'                   => 'Quantity',
+    'amount'                => 'Amount',
     'search'                => 'Search order',
     'success'               => [
         'title' =>'Order success',
@@ -66,6 +71,7 @@ return [
 
     'totals'                => [
         'sub_total' => 'Sub Total',
+        'subtotal' => 'Sub Total',
         'total'     => 'Total',
         'shipping'  => 'Shipping Fee',
         'discount'  => 'Discount',
@@ -75,6 +81,7 @@ return [
     ],
     'admin'                 => [
         'title'                => 'Order manager',
+        'config_title'         => 'Config info order',
         'create_success'       => 'Create new order success!',
         'list'                 => 'Order list',
         'id'                   => 'ID',
@@ -98,7 +105,9 @@ return [
         'add_new_title'        => 'Add new order',
         'add_new_des'          => 'Create a new order',
         'export_batch'         => 'Export',
-        'update_success'         => 'Update success!',
+        'update_success'       => 'Update success!',
+        'config_info'          => 'Config order',
+        'store'                => 'Store',
         'export_batch_group'   => [
             'all'          => 'All',
             'current_page' => 'Current page',

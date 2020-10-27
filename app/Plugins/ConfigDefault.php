@@ -9,6 +9,7 @@ abstract class  ConfigDefault
     public $configKey;
     public $title;
     public $version;
+    public $scartVersion;
     public $auth;
     public $link;
     public $image;
@@ -42,14 +43,6 @@ abstract class  ConfigDefault
      * Get data app
      */
     abstract public function getData();
-
-    /**
-     * Process other
-     */
-    public function process($data)
-    {
-        return null;
-    }
         
     /**
      * Config app

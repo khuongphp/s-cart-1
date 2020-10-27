@@ -44,6 +44,14 @@ return [
             'driver' => 'single',
             'path'   => storage_path('logs/laravel.log'),
             'level'  => 'debug',
+            'permission' => 0775,
+        ],
+
+        'handle'      => [
+            'driver' => 'daily',
+            'path'   => storage_path('logs/handle/laravel.log'),
+            'level'  => 'debug',
+            'days'   => 14,
         ],
 
         'daily'      => [
@@ -51,6 +59,7 @@ return [
             'path'   => storage_path('logs/laravel.log'),
             'level'  => 'debug',
             'days'   => 14,
+            'permission' => 0775,
         ],
 
         'slack'      => [
@@ -88,6 +97,20 @@ return [
         'errorlog'   => [
             'driver' => 'errorlog',
             'level'  => 'debug',
+        ],
+        'null' => [
+            'driver' => 'monolog',
+            'handler' => NullHandler::class,
+        ],
+        'emergency' => [
+            'path' => storage_path('logs/laravel.log'),
+        ],
+
+        'install'     => [
+            'driver' => 'single',
+            'path'   => storage_path('logs/install.log'),
+            'level'  => 'debug',
+            'permission' => 0775,
         ],
     ],
 

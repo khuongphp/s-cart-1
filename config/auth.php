@@ -71,11 +71,11 @@ return [
     'providers' => [
         'users'  => [
             'driver' => 'eloquent',
-            'model'  => App\Models\ShopUser::class,
+            'model'  => SCart\Core\Front\Models\ShopCustomer::class,
         ],
         'admins' => [
             'driver' => 'eloquent',
-            'model'  => App\Admin\Models\AdminUser::class,
+            'model'  => SCart\Core\Admin\Models\AdminUser::class,
         ],
     ],
 
@@ -106,5 +106,18 @@ return [
             'expire'   => 60,
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Password Confirmation Timeout
+    |--------------------------------------------------------------------------
+    |
+    | Here you may define the amount of seconds before a password confirmation
+    | times out and the user is prompted to re-enter their password via the
+    | confirmation screen. By default, the timeout lasts for three hours.
+    |
+    */
+
+    'password_timeout' => 10800,
 
 ];

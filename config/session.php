@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Str;
+
 return [
 
     /*
@@ -82,7 +85,6 @@ return [
     |
     */
 
-    'table' => 'sessions',
     'table' => env('DB_PREFIX', '').'shop_sessions',
 
     /*
@@ -124,7 +126,7 @@ return [
 
     'cookie' => env(
         'SESSION_COOKIE',
-        str_slug(env('APP_NAME', 'S_Cart'), '_').'_session'
+        Str::slug(env('APP_NAME', 'Scart'), '_').'_session'
     ),
 
     /*
@@ -164,7 +166,7 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE', false),
+    'secure' => env('SESSION_SECURE_COOKIE'),
 
     /*
     |--------------------------------------------------------------------------
@@ -186,12 +188,12 @@ return [
     |
     | This option determines how your cookies behave when cross-site requests
     | take place, and can be used to mitigate CSRF attacks. By default, we
-    | do not enable this as other CSRF protection services are in place.
+    | will set this value to "lax" since this is a secure default value.
     |
-    | Supported: "lax", "strict"
+    | Supported: "lax", "strict", "none", null
     |
     */
 
-    'same_site' => null,
+    'same_site' => 'lax',
 
 ];

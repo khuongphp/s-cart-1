@@ -1,12 +1,15 @@
-@extends('admin.layout')
+@extends($templatePathAdmin.'layout')
 
 @section('main')
+<div class="row">
+  <div class="col-md-12">
+     <div class="box">
           <div class="box-header with-border">
               <h2 class="box-title">{{ $title_description??'' }}</h2>
 
               <div class="box-tools">
                   <div class="btn-group pull-right" style="margin-right: 5px">
-                      <a href="{{ route('admin_plugin',['code'=>'Shipping']) }}" class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs"> {{trans('admin.back_list')}}</span></a>
+                      <a href="{{ sc_route('admin_plugin',['code'=>'Shipping']) }}" class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs"> {{trans('admin.back_list')}}</span></a>
                   </div>
               </div>
           </div>
@@ -22,21 +25,21 @@
                 <tbody>
                     <tr>
                       <td>
-                        <a href="#" class="updateData_num" 
+                        <a href="#" class="update-num" 
                         data-name="fee" 
                         data-type="text" 
                         data-pk="{{ $data['id'] }}" 
-                        data-url="{{ route('admin_plugin.process',['code'=>$code,'key'=>$key]) }}" 
+                        data-url="{{ sc_route('shippingstandard.updateConfig') }}" 
                         data-title="{{ trans($pathPlugin.'::lang.fee') }}">
                           {{ $data['fee'] }}
                         </a>
                     </td>
                       <td>
-                            <a href="#" class="updateData_num" 
+                            <a href="#" class="update-num" 
                             data-name="shipping_free" 
                             data-type="text" 
                             data-pk="{{ $data['id'] }}" 
-                            data-url="{{ route('admin_plugin.process',['code'=> $code,'key'=>$key]) }}" 
+                            data-url="{{ sc_route('shippingstandard.updateConfig') }}" 
                             data-title="{{ trans($pathPlugin.'::lang.shipping_free') }}">
                             {{ $data['shipping_free'] }}
                             </a>
@@ -48,6 +51,9 @@
               </table>
             </div>
             <!-- /.box-body -->
+     </div>
+  </div>
+</div>
 @endsection
 
 @push('styles')
@@ -66,9 +72,9 @@ $(document).ready(function() {
       return params;
     };
 
-    $('.updateData_num').editable({
+    $('.update-num').editable({
     ajaxOptions: {
-    type: 'put',
+    type: 'post',
     dataType: 'json'
     },
     validate: function(value) {
@@ -78,25 +84,6 @@ $(document).ready(function() {
         if (!$.isNumeric(value)) {
             return '{{  trans('admin.only_numeric') }}';
         }
-    }
-    });
-
-    $('.updateData').editable({
-    ajaxOptions: {
-    type: 'put',
-    dataType: 'json'
-    },
-    validate: function(value) {
-        if (value == '') {
-            return '{{  trans('admin.not_empty') }}';
-        }
-    }
-    });
-
-    $('.updateData_can_empty').editable({
-    ajaxOptions: {
-    type: 'put',
-    dataType: 'json'
     }
     });
 });

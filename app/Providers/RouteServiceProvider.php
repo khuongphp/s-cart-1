@@ -34,9 +34,7 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
-        if(!file_exists(public_path('install.php'))) {
-            $this->mapPluginsRoutes();
-        }
+
         $this->mapWebRoutes();
     }
 
@@ -49,7 +47,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware(['web', 'localization', 'currency'])
+        Route::middleware(['web', 'localization', 'currency', 'checkdomain'])
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
     }
@@ -65,17 +63,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
             ->middleware('api')
-            ->namespace('App\Api\Controllers')
+            ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
     }
 
-    protected function mapPluginsRoutes()
-    {
-        Route::middleware(['web', 'localization', 'currency'])
-            ->group(function () {
-                foreach (glob(app_path() . '/Plugins/*/*/Route.php') as $filename) {
-                    require_once $filename;
-                }       
-            });
-    }
 }

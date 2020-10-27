@@ -7,12 +7,12 @@ $('#coupon-button').click(function() {
        $('#coupon-button').button('loading');
        setTimeout(function() {
            $.ajax({
-               url: '{{ route('discount.process') }}',
+               url: '{{ sc_route('discount.process') }}',
                type: 'POST',
                dataType: 'json',
                data: {
                    code: coupon,
-                   uID: {{ auth()->user()->id ?? 0 }},
+                   uID: {{ session('customer')->id ?? 0 }},
                    _token: "{{ csrf_token() }}",
                },
            })
@@ -42,7 +42,7 @@ $('#coupon-button').click(function() {
    });
    $('#removeCoupon').click(function() {
            $.ajax({
-               url: '{{ route('discount.remove') }}',
+               url: '{{ sc_route('discount.remove') }}',
                type: 'POST',
                dataType: 'json',
                data: {

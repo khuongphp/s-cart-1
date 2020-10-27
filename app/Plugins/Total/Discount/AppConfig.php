@@ -4,7 +4,9 @@ namespace App\Plugins\Total\Discount;
 
 use App\Plugins\Total\Discount\Models\PluginModel;
 use App\Plugins\Total\Discount\Controllers\FrontController;
-use App\Models\AdminConfig;
+use SCart\Core\Admin\Models\AdminConfig;
+use SCart\Core\Admin\Models\AdminMenu;
+use SCart\Core\Front\Models\ShopCurrency;
 use App\Plugins\ConfigDefault;
 class AppConfig extends ConfigDefault
 {
@@ -12,9 +14,9 @@ class AppConfig extends ConfigDefault
     {
     	$config = file_get_contents(__DIR__.'/config.json');
     	$config = json_decode($config, true);
-    	$this->configGroup = $config['configGroup'];
-    	$this->configCode = $config['configCode'];
-    	$this->configKey = $config['configKey'];
+    	$this->configGroup = $config['configGroup'] ?? '';
+    	$this->configCode = $config['configCode'] ?? '';
+    	$this->configKey = $config['configKey'] ?? '';
         $this->pathPlugin = $this->configGroup . '/' . $this->configCode . '/' . $this->configKey;
         $this->title = trans($this->pathPlugin.'::lang.title');
         $this->image = $this->pathPlugin.'/'.$config['image'];
@@ -34,7 +36,7 @@ class AppConfig extends ConfigDefault
         $return = ['error' => 0, 'msg' => ''];
         $check = AdminConfig::where('key', $this->configKey)->first();
         if ($check) {
-            $return = ['error' => 1, 'msg' => 'Module exist'];
+            $return = ['error' => 1, 'msg' => trans('plugin.plugin_action.plugin_exist')];
         } else {
             $process = AdminConfig::insert(
                 [
@@ -46,10 +48,27 @@ class AppConfig extends ConfigDefault
                     'detail' => $this->pathPlugin.'::lang.title',
                 ]
             );
+
+            $blockMarketing = AdminMenu::where('key','MARKETING')->first();
+            if($blockMarketing) {
+                AdminMenu::insert([
+                    'sort' => 100,
+                    'parent_id' => $blockMarketing->id,
+                    'title' => 'lang::'.$this->pathPlugin.'::lang.title',
+                    'icon' => 'fas fa-tags',
+                    'uri' => 'route::admin_discount.index',
+                    'key' => $this->configKey,
+                    ]);
+            }
+
             if (!$process) {
-                $return = ['error' => 1, 'msg' => 'Error when install'];
+                $return = ['error' => 1, 'msg' => trans('plugin.plugin_action.install_faild')];
             } else {
-                $return = (new PluginModel)->installExtension();
+               try {
+                    (new PluginModel)->install();
+               } catch (\Throwable $e) {
+                    return  ['error' => 1, 'msg' => $e->getMessage()];
+               }
             }
         }
 
@@ -60,10 +79,11 @@ class AppConfig extends ConfigDefault
     {
         $return = ['error' => 0, 'msg' => ''];
         $process = (new AdminConfig)->where('key', $this->configKey)->delete();
+        AdminMenu::where('key', $this->configKey)->delete();
         if (!$process) {
-            $return = ['error' => 1, 'msg' => 'Error when uninstall'];
+            $return = ['error' => 1, 'msg' => trans('plugin.plugin_action.action_error', ['action' => 'Uninstall'])];
         }
-        (new PluginModel)->uninstallExtension();
+        (new PluginModel)->uninstall();
         return $return;
     }
     public function enable()
@@ -71,7 +91,7 @@ class AppConfig extends ConfigDefault
         $return = ['error' => 0, 'msg' => ''];
         $process = (new AdminConfig)->where('key', $this->configKey)->update(['value' => self::ON]);
         if (!$process) {
-            $return = ['error' => 1, 'msg' => 'Error enable'];
+            $return = ['error' => 1, 'msg' =>  trans('plugin.plugin_action.action_error', ['action' => 'Enable'])];
         }
         return $return;
     }
@@ -82,7 +102,7 @@ class AppConfig extends ConfigDefault
             ->where('key', $this->configKey)
             ->update(['value' => self::OFF]);
         if (!$process) {
-            $return = ['error' => 1, 'msg' => 'Error disable'];
+            $return = ['error' => 1, 'msg' => trans('plugin.plugin_action.action_error', ['action' => 'Disable'])];
         }
         return $return;
     }
@@ -94,42 +114,56 @@ class AppConfig extends ConfigDefault
 
     public function getData()
     {
-        $uID = auth()->user()->id ?? 0;
+        $customer = session('customer');
+        // Get Id customer
+        $uID = $customer->id ?? 0;
+        $dataStore = [];
         $arrData = [
-            'title' => $this->title,
-            'code' => $this->configCode,
-            'key' => $this->configKey,
-            'image' => $this->image,
+            'title'      => $this->title,
+            'code'       => $this->configCode,
+            'key'        => $this->configKey,
+            'image'      => $this->image,
             'permission' => self::ALLOW,
-            'value' => 0,
-            'version' => $this->version,
-            'auth' => $this->auth,
-            'link' => $this->link,
-            'pathPlugin' => $this->pathPlugin
+            'value'      => 0,
+            'version'    => $this->version,
+            'auth'       => $this->auth,
+            'link'       => $this->link,
+            'pathPlugin' => $this->pathPlugin,
+            'store'      => $dataStore,
         ];
 
-        $totalMethod = session('totalMethod',[]);
+        $totalMethod = session('totalMethod', []);
         $discount = $totalMethod['Discount']??'';
 
         $check = json_decode((new FrontController)->check($discount, $uID), true);
+
         if (!empty($discount) && !$check['error']) {
-            $arrType = [
-                'point' => 'Point',
-                'percent' => '%',
-            ];
-            $subtotal = \Cart::subtotal();
-            $value = ($check['content']['type'] == 'percent') ? floor($subtotal * $check['content']['reward'] / 100) : $check['content']['reward'];
+            $storeID = $check['content']['store_id'];
+            //Get cart item with group store id
+            $subtotalWithTax = ShopCurrency::sumCart()['store'][$storeID]['subTotalWithTax'] ?? null;
+            if (!$subtotalWithTax) {
+                return $arrData;
+            }
+            if ($check['content']['type'] == 'percent') {
+                $value = floor($subtotalWithTax * $check['content']['reward'] / 100);
+            } else {
+                $value = sc_currency_value($check['content']['reward']);
+            }
+            //Add info for earch store
+            $dataStore[$storeID]['value'] = $value;
+
             $arrData = array(
-                'title' => '<b>' . $this->title . ':</b> ' . $discount . '',
-                'code' => $this->configCode,
-                'key' => $this->configKey,
-                'image' => $this->image,
+                'title'      => '<b>' . $this->title . ':</b> ' . $discount . '',
+                'code'       => $this->configCode,
+                'key'        => $this->configKey,
+                'image'      => $this->image,
                 'permission' => self::ALLOW,
-                'value' => ($value > $subtotal) ? -$subtotal : -$value,
-                'version' => $this->version,
-                'auth' => $this->auth,
-                'link' => $this->link,
+                'value'      => ($value > $subtotalWithTax) ? -$subtotalWithTax : -$value,
+                'version'    => $this->version,
+                'auth'       => $this->auth,
+                'link'       => $this->link,
                 'pathPlugin' => $this->pathPlugin,
+                'store'      => $dataStore, //Add info for earch store
             );
         }
         return $arrData;
@@ -142,9 +176,10 @@ class AppConfig extends ConfigDefault
      *
      */
     public function endApp($data = []) {
+        $customer = session('customer');
         $orderID = $data['orderID'] ?? '';
         $code = $data['code'] ?? '';
-        $uID = auth()->user()->id ?? 0;
+        $uID = $customer->id ?? 0;
         $msg = 'Order #'.$orderID;
         return (new FrontController)->apply($code, $uID, $msg);
     }

@@ -32,16 +32,19 @@ return [
     'account'            => 'Account',
     'logout'             => 'Logout',
     'home'               => 'Home',
+    'shop'               => 'Shop home',
     'blog'               => 'Blog',
     'contact'            => 'Contact us',
     'about'              => 'About us',
-    'shop'               => 'Shop',
     'cms_category'       => 'CMS categories',
     'categories'         => 'Categories',
+    'sub_categories'     => 'Sub categories',
+    'categories_store'   => 'Categories store',
     'brands'             => 'Brands',
-    'suppliers'            => 'Suppliers',
+    'suppliers'          => 'Suppliers',
     'maintenance'        => 'Maintenance',
     'features_items'     => 'Features Items',
+    'products_new'       => 'Latest products',
     'recommended_items'  => 'Recommended items',
     'thank_contact'      => 'Thanks!. We will contact as soon as possible!',
     'date_available'     => 'Date available',
@@ -55,9 +58,11 @@ return [
     'products_last_view' => 'Products recently viewed',
     'products_build'     => 'Products build',
     'products_group'     => 'Products group',
+    'product_detail'     => 'Product detail',
     'submit_form'        => 'Submit',
     'price_include_tax'     => 'Price includes tax',
     'price_without_tax'     => 'Price without taxes',
+    'result_item'    => 'Showing <b>:item_from</b>-<b>:item_to</b> of <b>:item_total</b> items</b>',
     'subscribe'          => [
         'manager'           => 'Subscribe manager',
         'email'             => 'Email',
@@ -101,7 +106,7 @@ return [
 
     'shop_info'          => [
         'email'   => 'Email',
-        'hotline' => 'Hot line',
+        'hotline' => 'Hotline',
         'address' => 'Address',
     ],
     'filters'            => [
@@ -116,4 +121,9 @@ return [
         'id_asc'     => 'Sort by oldest product',
     ],
 
+    'captcha_action' => [
+        'submit' => 'Submit',
+    ],
+    'store' => 'Store',
+    'view_not_exist' => 'View not exist "<span style=\'color:red\'>:view</span>"',
 ];

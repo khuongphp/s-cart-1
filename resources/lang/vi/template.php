@@ -11,7 +11,7 @@ return [
     'error_config_format' => 'File config không đúng định dạng',
     'import_success' => 'Import thành công!',
     'error_exist' => 'Giao diện đã tồn tại!',
-    'template_import' => '<a href="'.route('admin_template.import').'" target=_new><span class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Import Plugin</span></a>',
+    'template_import' => '<a href="'.route('admin_template.import').'" target=_new><span class="btn btn-success btn-flat"><i class="fa fa-floppy-o" aria-hidden="true"></i> Import Plugin</span></a>',
     'template_more' => '<a href="https://s-cart.org/template.html" target=_new><i class="fa fa-download" aria-hidden="true"></i> Download đầy đủ Ở ĐÂY</a>',
     'manager'    => 'Quản lý giao diện',
     'title'      => 'Danh sách giao diện',
@@ -46,6 +46,7 @@ return [
     'image_demo' => 'Hình mẫu',
     'only_version_current' => 'Chỉ phiên bản này',
     'compatible' => 'Tương thích',
+    'used' => 'Đang sử dụng',
     'admin'      => [
         'list'  => 'Danh sách giao diện',
         'title' => 'Quan lý giao diện',

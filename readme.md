@@ -13,7 +13,7 @@
 </p>
 
 ## About S-cart
-S-Cart is a free e-commerce website project for businesses, built on the Laravel framework.
+SCart e-commerce: Free open source for businesses, built on the Laravel framework.
 Our highest goals are aimed at general users:
 - Customers do not need to know much about technology.
 - Powerful system, many useful functions.
@@ -25,22 +25,26 @@ Support this project :stuck_out_tongue_winking_eye: :pray:
     <a href="https://www.paypal.me/LeLanh" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" data-origin="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="PayPal Me"></a>
 </p>
 
-## S-Cart functions:
+## IMAGES:
+<img src="https://s-cart.org/data/30/shop-list.jpg?v=1">
+<img src="https://s-cart.org/data/30/admin-dashboard.jpg?v=1">
+
+## SCart functions:
 
 <pre>
 ======= FRONT-END =======
-
 - Multi-language
 - Multi-currency
+- Multi-address
 - Shopping cart
 - Customer login
-- Product attributes: cost price, promotion price, stock..
+- Product attributes: cost price, promotion price, stock, tax..
 - CMS content: category, news, content, web page
-- Module/Extension: Shipping, payment, discount, ...
+- Plugin: Shipping, payment, Discount, Total, Multiple vendor...
 - Upload manager: banner, images,..
-- SEO support: customer URL
+- SEO support: custome URL
 - API module
-- Support library plugin, template
+- Support library plugin, template online
 ...
 
 ======= ADMIN =======
@@ -50,7 +54,8 @@ Support this project :stuck_out_tongue_winking_eye: :pray:
 - Order management
 - Customer management
 - Template manager
-- Module/Extension manager
+- Plugin manager
+- Store manager
 - System config: email setting, info shop, maintain status,...
 - Backup, restore data
 - Report: chart, statistics, export csv, pdf...
@@ -63,12 +68,12 @@ Support this project :stuck_out_tongue_winking_eye: :pray:
 
 ## Requirements:
 
-Version 1.x
+From Version 4.0
 
-> Core laravel framework 6.x Requirements::
+> Core laravel framework 7.x Requirements::
 
 ```
-- PHP >= 7.2
+- PHP >= 7.2.5
 - OpenSSL PHP Extension
 - PDO PHP Extension
 - Mbstring PHP Extension
@@ -152,10 +157,39 @@ DB_PREFIX=sc_ (Must be "sc_" because it is fixed in the .sql file)
 - Access to url admin: <b>your-domain/sc_admin</b>.
 - User/pass <code><b>admin</b>/<b>admin</b></code>
 
+## Useful information:
+
+To view S-Cart version information
+
+`php artisan sc:info`
+
+To update the core version of S-Cart:
+
+`composer update s-cart/core`
+
+To create a plugin:
+
+`php artisan sc:make plugin  --name=Group\PluginName`
+
+To create data backup file
+
+`php artisan sc:backup --path=abc.sql`
+
+To recover data:
+
+`php artisan sc:restore --path=abc.sql`
+
+To manually customize the admin page:
+
+`php artian sc:customize admin`
+
+Then set the value  `customize = true` trong `app/config/admin.php`
+
+More detail: https://s-cart.org/docs/master
 
 ## License:
 
-`S-Cart` is licensed under [The MIT License (MIT)](LICENSE).
+`SCart` is licensed under [The MIT License (MIT)](LICENSE).
 
 ## Demo:
 
@@ -164,4 +198,4 @@ DB_PREFIX=sc_ (Must be "sc_" because it is fixed in the .sql file)
 
 ## 
 
-VPS SSD $5/mo, gets $50 in credit over 30 days. [DigitalOcean](https://m.do.co/c/450877e92a78).
+VPS SSD $5/mo, gets $100 in credit over 60 days. [DigitalOcean](https://m.do.co/c/84e350ce07c4).
