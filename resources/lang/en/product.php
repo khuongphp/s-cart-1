@@ -71,6 +71,8 @@ return [
         'edit'                              => 'Edit',
         'add_new'                           => 'Add new',
         'add_new_title'                     => 'Add new product',
+        'add_new_title_build'               => 'Add new product build',
+        'add_new_title_group'               => 'Add new product group',
         'add_new_des'                       => 'Create a new product',
         'export'                            => 'Export',
         'refresh'                           => 'Refresh',
@@ -108,7 +110,7 @@ return [
             'sold_asc'                      => 'Sold asc',
         ],
         'search'                            => 'Search',
-        'search_place'                      => 'Search Name, SKU or ID',
+        'search_place'                      => 'Search Name, SKU',
         'cant_remove_child'                 => 'Please remove list products from Builds or Groups before delete them',
     ],
     'types'                                 => [

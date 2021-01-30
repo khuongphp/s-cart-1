@@ -54,8 +54,8 @@ return [
         'result_item'         => 'Hiển thị <b>:item_from</b> tới <b>:item_to</b> trong số <b>:item_total</b> kết quả</b>',
         'sort'                => 'Sắp xếp',
         'search'              => 'Tìm kiếm',
-        'add_new_title'       => 'Tạo cấu hình',
-        'add_new_des'         => 'Tạo mới cấu hình',
+        'add_new_title'       => 'Tạo cửa hàng',
+        'add_new_des'         => 'Tạo mới một cửa hàng',
         'config_info'         => 'Thông tin',
         'config_product'      => 'Sản phẩm',
         'config_customer'     => 'Khách hàng',
@@ -70,5 +70,7 @@ return [
         'active_strict'  =>  'Kích hoạt chế độ kiểm tra tên miền',
         'active_domain'  =>  'Kích hoạt tên miền',
         'active_maintain'  =>  'Kích hoạt chế độ bảo trì',
+        'domain_exist' => ' Tên miền đã có rồi',
+        'value_cannot_change' => 'Giá trị này không thể thay đổi',
     ],
 ];

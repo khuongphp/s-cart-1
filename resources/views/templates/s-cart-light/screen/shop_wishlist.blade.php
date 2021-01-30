@@ -1,6 +1,6 @@
 @php
 /*
-$layout_page = shop_cart
+$layout_page = shop_wishlist
 **Variables:**
 - $wishlist: no paginate
 */
@@ -57,7 +57,7 @@ $layout_page = shop_cart
                                 <td>{!! $product->showPrice() !!}</td>
                                 <td>
                                     <a onClick="return confirm('Confirm')" title="Remove Item" alt="Remove Item"
-                                        class="cart_quantity_delete" href="{{ sc_route('wishlist.remove',['id'=>$item->rowId]) }}"><i
+                                        class="cart_quantity_delete" href="{{ sc_route('cart.remove', ['id'=>$item->rowId, 'instance' => 'wishlist']) }}"><i
                                             class="fa fa-times"></i></a>
                                 </td>
                             </tr>
@@ -70,6 +70,17 @@ $layout_page = shop_cart
         </div>
     </div>
 </div>
+
+{{-- Render block include view --}}
+@if ($includePathView = config('sc_include_view.shop_wishlist', []))
+@foreach ($includePathView as $view)
+  @if (view()->exists($view))
+    @include($view)
+  @endif
+@endforeach
+@endif
+{{--// Render block include view --}}
+
 @endsection
 
 {{-- breadcrumb --}}
@@ -93,5 +104,13 @@ $layout_page = shop_cart
 @endpush
 
 @push('scripts')
-{{-- Your scripts --}}
+  {{-- Render block include script --}}
+  @if ($includePathScript = config('sc_include_script.shop_wishlist', []))
+  @foreach ($includePathScript as $script)
+    @if (view()->exists($script))
+      @include($script)
+    @endif
+  @endforeach
+  @endif
+  {{--// Render block include script --}}
 @endpush

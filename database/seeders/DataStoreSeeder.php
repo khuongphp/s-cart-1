@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -66,9 +68,10 @@ class DataStoreSeeder extends Seeder
             ['group' => '', 'code' => 'customer_config_attribute', 'key' => 'customer_name_kana', 'value' => '0', 'sort' => '1', 'detail' => 'lang::customer.config_manager.name_kana', 'store_id' => $storeId],
             ['group' => '', 'code' => 'customer_config_attribute_required', 'key' => 'customer_name_kana_required', 'value' => '0', 'sort' => '1', 'detail' => '', 'store_id' => $storeId],
 
-            ['group' => '', 'code' => 'admin_config', 'key' => 'ADMIN_NAME', 'value' => 'SCart System', 'sort' => '0', 'detail' => 'lang::env.ADMIN_NAME', 'store_id' => $storeId],
-            ['group' => '', 'code' => 'admin_config', 'key' => 'ADMIN_TITLE', 'value' => 'SCart Admin', 'sort' => '0', 'detail' => 'lang::env.ADMIN_TITLE', 'store_id' => $storeId],
-            ['group' => '', 'code' => 'admin_config', 'key' => 'ADMIN_LOGO', 'value' => 'SCart Admin', 'sort' => '0', 'detail' => 'lang::env.ADMIN_LOGO', 'store_id' => $storeId],
+            ['group' => '', 'code' => 'admin_config', 'key' => 'ADMIN_NAME', 'value' => 'S-Cart System', 'sort' => '0', 'detail' => 'lang::env.ADMIN_NAME', 'store_id' => $storeId],
+            ['group' => '', 'code' => 'admin_config', 'key' => 'ADMIN_TITLE', 'value' => 'S-Cart Admin', 'sort' => '0', 'detail' => 'lang::env.ADMIN_TITLE', 'store_id' => $storeId],
+            ['group' => '', 'code' => 'admin_config', 'key' => 'ADMIN_LOGO', 'value' => 'S-Cart Admin', 'sort' => '0', 'detail' => 'lang::env.ADMIN_LOGO', 'store_id' => $storeId],
+            ['group' => '', 'code' => 'admin_config', 'key' => 'ADMIN_FOOTER_OFF', 'value' => '0', 'sort' => '0', 'detail' => 'lang::env.ADMIN_FOOTER_OFF', 'store_id' => $storeId],
 
 
             ['group' => '', 'code' => 'display_config', 'key' => 'product_top', 'value' => '8', 'sort' => '0', 'detail' => 'lang::admin.product_top', 'store_id' => $storeId],
@@ -78,14 +81,17 @@ class DataStoreSeeder extends Seeder
             ['group' => '', 'code' => 'display_config', 'key' => 'item_list', 'value' => '12', 'sort' => '0', 'detail' => 'lang::admin.item_list', 'store_id' => $storeId],
             ['group' => '', 'code' => 'display_config', 'key' => 'item_top', 'value' => '8', 'sort' => '0', 'detail' => 'lang::admin.item_top', 'store_id' => $storeId],
 
-            ['group' => '', 'code' => 'order_config', 'key' => 'shop_allow_guest', 'value' => '1', 'sort' => '11', 'detail' => 'lang::admin.shop_allow_guest', 'store_id' => $storeId],
-            ['group' => '', 'code' => 'order_config', 'key' => 'product_preorder', 'value' => '1', 'sort' => '18', 'detail' => 'lang::admin.product_preorder', 'store_id' => $storeId],
-            ['group' => '', 'code' => 'order_config', 'key' => 'product_buy_out_of_stock', 'value' => '1', 'sort' => '20', 'detail' => 'lang::admin.product_buy_out_of_stock', 'store_id' => $storeId],
+            ['group' => '', 'code' => 'order_config', 'key' => 'shop_allow_guest', 'value' => '1', 'sort' => '11', 'detail' => 'lang::order.admin.shop_allow_guest', 'store_id' => $storeId],
+            ['group' => '', 'code' => 'order_config', 'key' => 'product_preorder', 'value' => '1', 'sort' => '18', 'detail' => 'lang::order.admin.product_preorder', 'store_id' => $storeId],
+            ['group' => '', 'code' => 'order_config', 'key' => 'product_buy_out_of_stock', 'value' => '1', 'sort' => '20', 'detail' => 'lang::order.admin.product_buy_out_of_stock', 'store_id' => $storeId],
+            ['group' => '', 'code' => 'order_config', 'key' => 'shipping_off', 'value' => '0', 'sort' => '20', 'detail' => 'lang::order.admin.shipping_off', 'store_id' => $storeId],
+            ['group' => '', 'code' => 'order_config', 'key' => 'payment_off', 'value' => '0', 'sort' => '20', 'detail' => 'lang::order.admin.payment_off', 'store_id' => $storeId],
 
-            ['group' => '', 'code' => 'email_action', 'key' => 'email_action_mode', 'value' => '1', 'sort' => '0', 'detail' => 'lang::email.email_action.email_action_mode', 'store_id' => $storeId],
+            ['group' => '', 'code' => 'email_action', 'key' => 'email_action_mode', 'value' => '0', 'sort' => '0', 'detail' => 'lang::email.email_action.email_action_mode', 'store_id' => $storeId],
             ['group' => '', 'code' => 'email_action', 'key' => 'email_action_queue', 'value' => '0', 'sort' => '1', 'detail' => 'lang::email.email_action.email_action_queue', 'store_id' => $storeId],
             ['group' => '', 'code' => 'email_action', 'key' => 'order_success_to_admin', 'value' => '0', 'sort' => '1', 'detail' => 'lang::email.email_action.order_success_to_admin', 'store_id' => $storeId],
             ['group' => '', 'code' => 'email_action', 'key' => 'order_success_to_customer', 'value' => '0', 'sort' => '2', 'detail' => 'lang::email.email_action.order_success_to_cutomer', 'store_id' => $storeId],
+            ['group' => '', 'code' => 'email_action', 'key' => 'order_success_to_customer_pdf', 'value' => '0', 'sort' => '3', 'detail' => 'lang::email.email_action.order_success_to_cutomer_pdf', 'store_id' => $storeId],
             ['group' => '', 'code' => 'email_action', 'key' => 'welcome_customer', 'value' => '0', 'sort' => '4', 'detail' => 'lang::email.email_action.welcome_customer', 'store_id' => $storeId],
             ['group' => '', 'code' => 'email_action', 'key' => 'contact_to_admin', 'value' => '1', 'sort' => '6', 'detail' => 'lang::email.email_action.contact_to_admin', 'store_id' => $storeId],
 
@@ -98,7 +104,6 @@ class DataStoreSeeder extends Seeder
             ['group' => '', 'code' => 'url_config', 'key' => 'SUFFIX_URL', 'value' => '.html', 'sort' => '0', 'detail' => 'lang::url.SUFFIX_URL', 'store_id' => $storeId],
             ['group' => '', 'code' => 'url_config', 'key' => 'PREFIX_SHOP', 'value' => 'shop', 'sort' => '0', 'detail' => 'lang::env.PREFIX_SHOP', 'store_id' => $storeId],
             ['group' => '', 'code' => 'url_config', 'key' => 'PREFIX_BRAND', 'value' => 'brand', 'sort' => '0', 'detail' => 'lang::env.PREFIX_BRAND', 'store_id' => $storeId],
-            ['group' => '', 'code' => 'url_config', 'key' => 'PREFIX_SUPPLIER', 'value' => 'supplier', 'sort' => '0', 'detail' => 'lang::env.PREFIX_SUPPLIER', 'store_id' => $storeId],
             ['group' => '', 'code' => 'url_config', 'key' => 'PREFIX_CATEGORY', 'value' => 'category', 'sort' => '0', 'detail' => 'lang::env.PREFIX_CATEGORY', 'store_id' => $storeId],
             ['group' => '', 'code' => 'url_config', 'key' => 'PREFIX_SUB_CATEGORY', 'value' => 'sub-category', 'sort' => '0', 'detail' => 'lang::env.PREFIX_SUB_CATEGORY', 'store_id' => $storeId],
             ['group' => '', 'code' => 'url_config', 'key' => 'PREFIX_PRODUCT', 'value' => 'product', 'sort' => '0', 'detail' => 'lang::env.PREFIX_PRODUCT', 'store_id' => $storeId],
@@ -167,7 +172,7 @@ class DataStoreSeeder extends Seeder
 <h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:center">{{$title}}</h1>
 <p style="text-align:center;">Welcome to my site!</p>', 'status' => '1', 'store_id' => $storeId],
               ['name' => 'Send form contact to admin', 'group' => 'contact_to_admin', 'text' => '
-<table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0">
+<table class="inner-body" align="center" cellpadding="0" cellspacing="0">
 <tr>
 <td>
 <b>Name</b>: {{$name}}<br>
@@ -178,14 +183,14 @@ class DataStoreSeeder extends Seeder
 </table>
 <hr>
 <p style="text-align: center;">Content:<br>
-<table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" border="0">
+<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td>{{$content}}</td>
 </tr>
 </table>', 'status' => '1', 'store_id' => $storeId],
 
               ['name' => 'New order to admin', 'group' => 'order_success_to_admin', 'text' => '
-<table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0">
+<table class="inner-body" align="center" cellpadding="0" cellspacing="0">
   <tr>
       <td>
           <b>Order ID</b>: {{$orderID}}<br>
@@ -200,7 +205,7 @@ class DataStoreSeeder extends Seeder
 <hr>
 <p style="text-align: center;">Order detail:<br>
 ===================================<br></p>
-<table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" border="1">
+<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">
   {{$orderDetail}}
   <tr>
       <td colspan="2"></td>
@@ -225,7 +230,7 @@ class DataStoreSeeder extends Seeder
 </table>', 'status' => '1', 'store_id' => $storeId],
 
               ['name' => 'New order to customr', 'group' => 'order_success_to_customer', 'text' => '
-<table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0">
+<table class="inner-body" align="center" cellpadding="0" cellspacing="0">
 <tr>
   <td>
       <b>Order ID</b>: {{$orderID}}<br>
@@ -239,7 +244,7 @@ class DataStoreSeeder extends Seeder
 <hr>
 <p style="text-align: center;">Order detail:<br>
 ===================================<br></p>
-<table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" border="1">
+<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">
 {{$orderDetail}}
 <tr>
   <td colspan="2"></td>

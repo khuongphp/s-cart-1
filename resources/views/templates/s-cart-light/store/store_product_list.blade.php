@@ -109,6 +109,17 @@ Use paginate: $products->appends(request()->except(['page','_token']))->links()
     </nav>
   </div>
   {{-- //Product list --}}
+
+{{-- Render block include view --}}
+@if ($includePathView = config('sc_include_view.store_product_list', []))
+@foreach ($includePathView as $view)
+  @if (view()->exists($view))
+    @include($view)
+  @endif
+@endforeach
+@endif
+{{--// Render block include view --}}
+
 @endsection
 {{-- //block_main_content_center --}}
 
@@ -116,11 +127,11 @@ Use paginate: $products->appends(request()->except(['page','_token']))->links()
 @section('blockStoreLeft')
 {{-- Categories tore --}}
 
-@if (function_exists('sc_get_categories_store_front') &&  count(sc_get_categories_store_front($storeId)))
+@if (function_exists('sc_store_get_categories_front') &&  count(sc_store_get_categories_front($storeId)))
 <div class="aside-item col-sm-6 col-md-5 col-lg-12">
   <h6 class="aside-title">{{ trans('front.categories_store') }}</h6>
   <ul class="list-shop-filter">
-    @foreach (sc_get_categories_store_front($storeId) as $category)
+    @foreach (sc_store_get_categories_front($storeId) as $category)
     <li class="product-minimal-title active"><a href="{{ $category->getUrl() }}"> {{ $category->getTitle() }}</a></li>
     @endforeach
   </ul>
@@ -165,6 +176,17 @@ Use paginate: $products->appends(request()->except(['page','_token']))->links()
       $('#filter_sort').submit();
   });
 </script>
+
+  {{-- Render block include script --}}
+  @if ($includePathScript = config('sc_include_script.store_product_list', []))
+  @foreach ($includePathScript as $script)
+    @if (view()->exists($script))
+      @include($script)
+    @endif
+  @endforeach
+  @endif
+  {{--// Render block include script --}}
+
 @endpush
 
 @push('styles')

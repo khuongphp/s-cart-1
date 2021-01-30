@@ -50,8 +50,8 @@ class CmsCategoryController extends RootAdminController
             'sort' => trans($this->plugin->pathPlugin.'::Category.sort'),
             'action' => trans($this->plugin->pathPlugin.'::Category.admin.action'),
         ];
-        $sort_order = request('sort_order') ?? 'id_desc';
-        $keyword = request('keyword') ?? '';
+        $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
+        $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
             'id__desc' => trans($this->plugin->pathPlugin.'::Category.admin.sort_order.id_desc'),
             'id__asc' => trans($this->plugin->pathPlugin.'::Category.admin.sort_order.id_asc'),
@@ -101,8 +101,8 @@ class CmsCategoryController extends RootAdminController
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
+        $data['urlSort'] = sc_route('admin_cms_category.index', request()->except(['_token', '_pjax', 'sort_order']));
 
-        $data['urlSort'] = sc_route('admin_cms_category.index');
         $data['optionSort'] = $optionSort;
         //=menuSort
 

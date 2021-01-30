@@ -19,6 +19,7 @@ class CreateTablesShop extends Migration
 
         Schema::create(SC_DB_PREFIX.'shop_banner', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title', 255)->nullable();
             $table->string('image', 255)->nullable();
             $table->string('url', 100)->nullable();
             $table->string('target', 50)->nullable();
@@ -156,7 +157,7 @@ class CreateTablesShop extends Migration
 
         Schema::create(SC_DB_PREFIX.'shop_order', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id');
+            $table->integer('customer_id')->index();
             $table->string('domain')->nullable();
             $table->integer('subtotal')->nullable()->default(0);
             $table->integer('shipping')->nullable()->default(0);
@@ -423,7 +424,7 @@ class CreateTablesShop extends Migration
 
         Schema::create(SC_DB_PREFIX.'shop_customer_address', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id');
+            $table->integer('customer_id')->index();
             $table->string('first_name', 100);
             $table->string('last_name', 100)->nullable();
             $table->string('first_name_kana', 100)->nullable();
@@ -528,7 +529,7 @@ class CreateTablesShop extends Migration
 
         Schema::create('oauth_refresh_tokens', function (Blueprint $table) {
             $table->string('id', 100)->primary();
-            $table->string('access_token_id', 100);
+            $table->string('access_token_id', 100)->index();
             $table->boolean('revoked');
             $table->dateTime('expires_at')->nullable();
             }
@@ -539,6 +540,7 @@ class CreateTablesShop extends Migration
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->string('name');
             $table->string('secret', 100)->nullable();
+            $table->string('provider')->nullable();
             $table->text('redirect');
             $table->boolean('personal_access_client');
             $table->boolean('password_client');
@@ -602,6 +604,7 @@ class CreateTablesShop extends Migration
 
         Schema::create('failed_jobs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('uuid')->nullable()->unique();
             $table->text('connection');
             $table->text('queue');
             $table->longText('payload');

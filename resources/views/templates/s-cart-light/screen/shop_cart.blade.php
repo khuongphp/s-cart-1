@@ -65,7 +65,7 @@ $layout_page = shop_cart
                                             {{ $product->name }}<br />
 
                                             {{-- Go to store --}}
-                                            @if (sc_config_global('MultiStorePro') && config('app.storeId') == 1)
+                                            @if (sc_config_global('MultiStorePro') && config('app.storeId') == SC_ID_ROOT)
                                             <div class="store-url"><a href="{{ $product->goToStore() }}"><i class="fa fa-shopping-bag" aria-hidden="true"></i> {{ trans('front.store').' '. $product->store_id  }}</a>
                                             </div>
                                             @endif
@@ -105,7 +105,7 @@ $layout_page = shop_cart
                                 <td align="center">
                                     <a onClick="return confirm('Confirm?')" title="Remove Item" alt="Remove Item"
                                         class="cart_quantity_delete"
-                                        href="{{ sc_route("cart.remove",['id'=>$item->rowId]) }}">
+                                        href="{{ sc_route("cart.remove", ['id'=>$item->rowId, 'instance' => 'cart']) }}">
                                         <i class="fa fa-times" aria-hidden="true"></i>
                                     </a>
                                 </td>
@@ -127,7 +127,7 @@ $layout_page = shop_cart
                 </div>
                 <div class="pull-right">
                     <button class="btn btn-delete-all" type="button"
-                        onClick="if(confirm('Confirm ?')) window.location.href='{{ sc_route('cart.clear') }}';">
+                        onClick="if(confirm('Confirm ?')) window.location.href='{{ sc_route('cart.clear', ['instance' => 'cart']) }}';">
                         <i class="fa fa-window-close" aria-hidden="true"></i>
                         {{ trans('cart.remove_all') }}</button>
                 </div>
@@ -135,7 +135,7 @@ $layout_page = shop_cart
             {{--// Button backshop, clear cart --}}
 
             <div class="col-md-12">
-                <form class="sc-shipping-address" id="form-process" role="form" method="POST" action="{{ sc_route('cart.process') }}">
+                <form class="sc-shipping-address" id="form-process" role="form" method="POST" action="{{ sc_route('checkout.prepare') }}">
                     {{-- Required csrf for secirity --}}
                     @csrf
                     {{--// Required csrf for secirity --}}
@@ -381,7 +381,7 @@ $layout_page = shop_cart
                                     </div>
                                     {{-- //Total method --}}
 
-
+@if (!sc_config('shipping_off'))
                                     {{-- Shipping method --}}
                                     <div class="row">
                                         <div class="col-md-12">
@@ -412,8 +412,9 @@ $layout_page = shop_cart
                                         </div>
                                     </div>
                                     {{-- //Shipping method --}}
+@endif
 
-
+@if (!sc_config('payment_off'))
                                     {{-- Payment method --}}
                                     <div class="row">
                                         <div class="col-md-12">
@@ -446,6 +447,8 @@ $layout_page = shop_cart
                                         </div>
                                     </div>
                                     {{-- //Payment method --}}
+@endif
+
                                 </div>
                                 
                             </div>
@@ -470,6 +473,18 @@ $layout_page = shop_cart
         </div>
     </div>
 </section>
+
+{{-- Render block include view --}}
+@if ($includePathView = config('sc_include_view.shop_cart', []))
+@foreach ($includePathView as $view)
+  @if (view()->exists($view))
+    @include($view)
+  @endif
+@endforeach
+@endif
+{{--// Render block include view --}}
+
+
 @endsection
 
 
@@ -490,13 +505,27 @@ $layout_page = shop_cart
 
 
 @push('scripts')
-<script type="text/javascript">
-    @foreach ($totalMethod as $key => $plugin)
-        @if (view()->exists($plugin['pathPlugin'].'::script'))
-            @include($plugin['pathPlugin'].'::script')
-        @endif
-    @endforeach
 
+{{-- Render script from total method --}}
+@foreach ($totalMethod as $key => $plugin)
+@if (view()->exists($plugin['pathPlugin'].'::script'))
+    @include($plugin['pathPlugin'].'::script')
+@endif
+@endforeach
+{{--// Render script from total method --}}
+
+{{-- Render block include script --}}
+@if ($includePathScript = config('sc_include_script.shop_cart', []))
+@foreach ($includePathScript as $script)
+@if (view()->exists($script))
+    @include($script)
+@endif
+@endforeach
+@endif
+{{--// Render block include script --}}
+
+
+<script type="text/javascript">
     function updateCart(obj){
         let new_qty = obj.val();
         let storeId = obj.data('store_id');
@@ -559,13 +588,13 @@ $layout_page = shop_cart
         } else {
             $.ajax({
             url: '{{ sc_route('customer.address_detail') }}',
-            type: 'POST',
+            type: 'GET',
             dataType: 'json',
             async: false,
             cache: false,
             data: {
                 id: id,
-                _token:'{{ csrf_token() }}'},
+            },
             success: function(data){
                 error= parseInt(data.error);
                 if(error === 1)

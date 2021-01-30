@@ -44,9 +44,7 @@ class AdminCmsCategory extends CmsCategory
 
         if ($keyword) {
             $categoryList = $categoryList->where(function ($sql) use($tableDescription, $tableCategory, $keyword){
-                $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%')
-                    ->orWhere($tableDescription . '.keyword', 'like', '%' . $keyword . '%')
-                    ->orWhere($tableDescription . '.description', 'like', '%' . $keyword . '%');
+                $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%');
             });
         }
 
@@ -153,7 +151,7 @@ class AdminCmsCategory extends CmsCategory
      * @return  [type]              [return description]
      */
     public static function createCategoryAdmin(array $dataInsert) {
-        $dataInsert = sc_clean($dataInsert);
+
         return self::create($dataInsert);
     }
 
@@ -166,7 +164,7 @@ class AdminCmsCategory extends CmsCategory
      * @return  [type]              [return description]
      */
     public static function insertDescriptionAdmin(array $dataInsert) {
-        $dataInsert = sc_clean($dataInsert);
+
         return CmsCategoryDescription::create($dataInsert);
     }
 
@@ -182,14 +180,14 @@ class AdminCmsCategory extends CmsCategory
      * @return  [type]          [return description]
      */
     public function checkAliasValidationAdmin($type = null, $fieldValue = null, $categoryId = null, $storeId = null) {
-        $storeId = $storeId ? sc_clean($storeId) : session('adminStoreId');
-        $type = $type ? sc_clean($type) : 'alias';
-        $fieldValue = sc_clean($fieldValue);
-        $categoryId = sc_clean($categoryId);
+        $storeId = $storeId ? $storeId : session('adminStoreId');
+        $type = $type ? $type : 'alias';
+        $fieldValue = $fieldValue;
+        $categoryId = $categoryId;
         $tablePTS = (new AdminCmsCategory)->getTable();
         $check =  $this
-        ->where($type, $fieldValue)
-        ->where($tablePTS . '.store_id', $storeId);
+            ->where($type, $fieldValue)
+            ->where($tablePTS . '.store_id', $storeId);
         if($categoryId) {
             $check = $check->where('id', '<>', $categoryId);
         }

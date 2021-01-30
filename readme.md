@@ -1,35 +1,30 @@
 <p align="center">
     <img src="https://s-cart.org/logo.png?v=4" width="150">
 </p>
-<p align="center">Free Laravel e-commerce for business<br>
+<p align="center">Free open source e-commerce for business<br>
     <code><b>composer create-project s-cart/s-cart</b></code></p>
 <p align="center">
- <a href="https://s-cart.org">Home page</a> | <a href="https://demo.s-cart.org">Demo</a> | <a href="https://demo.s-cart.org/sc_admin">Demo admin</a> | <a href="https://s-cart.org/docs/master/installation.html">Installation</a>  | <a href="https://s-cart.org/docs/master/video-guide.html">Video Guide</a> | <a href="https://s-cart.org/download.html">Download full source</a>
+ <a href="https://s-cart.org">Home page</a> | <a href="https://demo.s-cart.org">Demo</a> | <a href="https://demo.s-cart.org/sc_admin">Demo admin</a> | <a href="https://s-cart.org/en/docs/master/installation.html">Installation</a>  | <a href="https://s-cart.org/en/docs/master/video-guide.html">Video Guide</a> | <a href="https://s-cart.org/en/download.html">Download full source</a>
 </p>
 <p align="center">
-<a href="https://packagist.org/packages/s-cart/s-cart"><img src="https://poser.pugx.org/s-cart/s-cart/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/s-cart/s-cart"><img src="https://poser.pugx.org/s-cart/s-cart/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/s-cart/s-cart"><img src="https://poser.pugx.org/s-cart/s-cart/license.svg" alt="License"></a>
+<a href="https://packagist.org/packages/s-cart/s-cart"><img src="https://poser.pugx.org/s-cart/s-cart/d/total" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/s-cart/s-cart"><img src="https://poser.pugx.org/s-cart/s-cart/v/stable" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/s-cart/s-cart"><img src="https://poser.pugx.org/s-cart/s-cart/license" alt="License"></a>
 </p>
 
 ## About S-cart
-SCart e-commerce: Free open source for businesses, built on the Laravel framework.
-Our highest goals are aimed at general users:
-- Customers do not need to know much about technology.
-- Powerful system, many useful functions.
-- Easy to access, easy to use.
-
-## Support the project
-Support this project :stuck_out_tongue_winking_eye: :pray:
-<p align="center">
-    <a href="https://www.paypal.me/LeLanh" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" data-origin="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="PayPal Me"></a>
-</p>
+S-Cart is the best free e-commerce website project for individuals and businesses, built on top of Laravel Framework and the latest technologies.
+Our goal is "Efficient and friendly for everyone":
+- Efficiency: Meet even the smallest requirements of customers.
+- Friendly: Easy to use, easy to maintain, easy to develop.
+- Everyone: Businesses, individuals, developers, students.
 
 ## IMAGES:
+<img src="https://sc-shared.s3.ap-southeast-1.amazonaws.com/guide/info/s-cart-content.jpg">
 <img src="https://s-cart.org/data/30/shop-list.jpg?v=1">
 <img src="https://s-cart.org/data/30/admin-dashboard.jpg?v=1">
 
-## SCart functions:
+## S-Cart functions:
 
 <pre>
 ======= FRONT-END =======
@@ -68,12 +63,12 @@ Support this project :stuck_out_tongue_winking_eye: :pray:
 
 ## Requirements:
 
-From Version 4.0
+From Version 5.0
 
-> Core laravel framework 7.x Requirements::
+> Core laravel framework 8.x Requirements::
 
 ```
-- PHP >= 7.2.5
+- PHP >= 7.3
 - OpenSSL PHP Extension
 - PDO PHP Extension
 - Mbstring PHP Extension
@@ -86,7 +81,7 @@ From Version 4.0
 
 ## Installation & configuration:
 
-<b>How to map your domain to s-cart? <a href="https://s-cart.org/docs/master/installation.html">CLICK HERE</a></b>
+<b>How to map your domain to s-cart? <a href="https://s-cart.org/en/docs/master/installation.html">CLICK HERE</a></b>
 
 **Step1: Install last version S-cart**
 
@@ -105,7 +100,7 @@ composer install
 ```
 Option 3: **Download full source (included vendors)**
 ```
-https://s-cart.org/download.html
+https://s-cart.org/en/download.html
 ```
 
 **Step2: Set writable permissions for the following directories:**
@@ -166,12 +161,13 @@ To view S-Cart version information
 To update the core version of S-Cart:
 
 `composer update s-cart/core`
+Or you can use `php composer.phar update s-cart/core` if you don't have composer installed.
 
 To create a plugin:
 
 `php artisan sc:make plugin  --name=Group\PluginName`
 
-To create data backup file
+To create data backup file (The sql file is stored in storage/backups):
 
 `php artisan sc:backup --path=abc.sql`
 
@@ -181,15 +177,25 @@ To recover data:
 
 To manually customize the admin page:
 
-`php artian sc:customize admin`
+`php artisan sc:customize admin`
 
-Then set the value  `customize = true` trong `app/config/admin.php`
+This command will create new directories `resources/views/admin` and file `config/admin.php`
+After set the value `customize=true` in `config/admin.php` you can modify template admin. 
 
-More detail: https://s-cart.org/docs/master
+More detail: https://s-cart.org/en/docs/master
+
+## Funding and supporting the project
+
+You can support our with donations and sponsoring. Sponsorships are crucial for ongoing and future development of the project. Any support is always welcome even if it's as low as $1 :) 
+Please visit the <a href="https://s-cart.org/en/license.html" target="_blank">S-Cart</a>
+
+## Security Vulnerabilities:
+
+If you discover a security vulnerability within S-Cart ecommerce, please send an e-mail to Lanh Le via lanhktc@gmail.com. All security vulnerabilities will be promptly addressed.
 
 ## License:
 
-`SCart` is licensed under [The MIT License (MIT)](LICENSE).
+`S-Cart` is licensed under [The MIT License (MIT)](LICENSE).
 
 ## Demo:
 

@@ -9,11 +9,12 @@ return [
     'url'    => 'Url',
     'sort'   => 'Sort',
     'status' => 'Status',
+    'title' => 'Title',
     'admin'  => [
         'title'          => 'Banner',
         'create_success' => 'Create new item success!',
         'edit_success'   => 'Edit item success!',
-        'list'           => 'Brand list',
+        'list'           => 'Banner list',
         'id'             => 'ID',
         'status'         => 'Status',
         'action'         => 'Action',
@@ -29,7 +30,7 @@ return [
         'add_new_des'    => 'Create a new banner',
         'select_target'    => 'Select target',
 
-        'search_place'   => 'Search name',
+        'search_place'   => 'Search title',
         'sort_order'     => [
             'id_asc'     => 'ID asc',
             'id_desc'    => 'ID desc',

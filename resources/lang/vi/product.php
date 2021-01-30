@@ -70,6 +70,8 @@ return [
         'edit'                              => 'Sửa',
         'add_new'                           => 'Thêm mới',
         'add_new_title'                     => 'Tạo sản phẩm',
+        'add_new_title_build'               => 'Tạo sản phẩm bộ',
+        'add_new_title_group'               => 'Tạo sản phẩm nhóm',
         'add_new_des'                       => 'Tạo mới một sản phẩm',
         'export'                            => 'Xuất',
         'refresh'                           => 'Làm mới',
@@ -106,7 +108,7 @@ return [
             'sold_asc'                      => 'Bán ra tăng',                         
         ],
         'search'                            => 'Tìm kiếm',
-        'search_place'                      => 'Tìm tên, SKU hoặc ID sản phẩm',
+        'search_place'                      => 'Tìm tên, SKU',
         'cant_remove_child'                 => 'Vui lòng gỡ bỏ những sản phẩm sau khỏi Group hoặc Build trước khi xóa chúng',
         'search_order'                      => [
             'status'                        => 'Tất cả trạng thái',

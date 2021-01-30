@@ -64,7 +64,7 @@ $layout_page = product_detail
               <div class="single-product">
                 <h3 class="text-transform-none font-weight-medium" id="product-detail-name">{{ $product->name }}</h3>
                 {{-- Go to store --}}
-                @if (sc_config_global('MultiStorePro') && config('app.storeId') == 1)
+                @if (sc_config_global('MultiStorePro') && config('app.storeId') == SC_ID_ROOT)
                 <div class="store-url"><a href="{{ $product->goToStore() }}"><i class="fa fa-shopping-bag" aria-hidden="true"></i> {{ trans('front.store').' '. $product->store_id  }}</a>
                 </div>
                 @endif
@@ -282,6 +282,18 @@ $layout_page = product_detail
         </div>
       </section>
       @endif
+
+{{-- Render block include view --}}
+  @if ($includePathView = config('sc_include_view.product_detail', []))
+    @foreach ($includePathView as $view)
+      @if (view()->exists($view))
+        @include($view)
+      @endif
+    @endforeach
+  @endif
+{{--// Render block include view --}}
+
+
 <!--/product-details-->
 @endsection
 {{-- block_main --}}
@@ -308,7 +320,7 @@ $bannerBreadcrumb = $modelBanner->start()->getBreadcrumb()->getData()->first();
       <ul class="breadcrumbs-custom-path">
         <li><a href="{{ sc_route('home') }}">{{ trans('front.home') }}</a></li>
         {{-- Display store info if use MultiStorePro --}}
-        @if (sc_config_global('MultiStorePro') && config('app.storeId') == 1)
+        @if (sc_config_global('MultiStorePro') && config('app.storeId') == SC_ID_ROOT)
         <li><a href="{{ $goToStore }}">{{ sc_store('title', $product->store_id) }}</a></li>
         @endif
         {{--// Display store info if use MultiStorePro --}}
@@ -326,5 +338,13 @@ $bannerBreadcrumb = $modelBanner->start()->getBreadcrumb()->getData()->first();
 @endpush
 
 @push('scripts')
-{{-- Your scripts --}}
+  {{-- Render block include script --}}
+  @if ($includePathScript = config('sc_include_script.product_detail', []))
+  @foreach ($includePathScript as $script)
+    @if (view()->exists($script))
+      @include($script)
+    @endif
+  @endforeach
+  @endif
+  {{--// Render block include script --}}
 @endpush

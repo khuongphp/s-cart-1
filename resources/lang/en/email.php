@@ -39,7 +39,7 @@ return [
         'smtp_password'  => 'Password SMTP',
         'smtp_user'      => 'Tài khoản SMTP',
         'smtp_host'      => 'Server SMTP',
-        'help_note'      => '<span class="text-red">(*)</span>: Emails will not be sent directly, but through a queue. You need to set up "artisan schedule: run" first, details <a href="https://s-cart.org/docs/'.config('scart.version').'/email.html">HERE</a>',
+        'help_note'      => '<span class="text-red">(*)</span>: Emails will not be sent directly, but through a queue. You need to set up "artisan schedule: run" first, details <a href="https://s-cart.org/docs/'.config('s-cart.version').'/email.html">HERE</a>',
 
 
     ],
@@ -50,6 +50,7 @@ return [
         'sort'                     => 'Action sort',
         'order_success_to_admin'   => 'Send order success to admin',
         'order_success_to_cutomer' => 'Send order success to customer',
+        'order_success_to_cutomer_pdf' => 'Send order success to customer with pdf invoice',
         'forgot_password'          => 'Send email forgot',
         'welcome_customer'         => 'Send email welcome',
         'contact_to_customer'      => 'Send email contact to customer',

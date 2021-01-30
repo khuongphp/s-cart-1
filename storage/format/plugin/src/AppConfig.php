@@ -1,12 +1,12 @@
 <?php
 /**
- * Version 3.1
+ * From version 4.4
  */
 #App\Plugins\Plugin_Code\Plugin_Key\AppConfig.php
 namespace App\Plugins\Plugin_Code\Plugin_Key;
 
 use App\Plugins\Plugin_Code\Plugin_Key\Models\PluginModel;
-use App\Admin\Models\AdminConfig;
+use SCart\Core\Admin\Models\AdminConfig;
 use App\Plugins\ConfigDefault;
 class AppConfig extends ConfigDefault
 {
